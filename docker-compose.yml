@@ -1,0 +1,28 @@
+version: '2'
+services:
+    sonar:
+        extends:
+            file: services/sonar.yml
+            service: sonar
+    mariadb:
+        extends:
+            file: services/mariadb.yml
+            service: mariadb
+    kafka:
+        extends:
+            file: services/kafka.yml
+            service: kafka
+        environment:
+            - KAFKA_ADVERTISED_HOST_NAME=kafka
+        depends_on:
+            - zookeeper
+    zookeeper:
+        extends:
+            file: services/kafka.yml
+            service: zookeeper
+    jhipster-registry:
+        extends:
+            file: services/jhipster-registry.yml
+            service: jhipster-registry
+        environment:
+            - SPRING_CLOUD_CONFIG_SERVER_NATIVE_SEARCH_LOCATIONS=file:./central-config/docker-config/
