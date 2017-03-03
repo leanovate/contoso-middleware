@@ -12,8 +12,6 @@ services:
         extends:
             file: services/kafka.yml
             service: kafka
-        environment:
-            - KAFKA_ADVERTISED_HOST_NAME=kafka
         depends_on:
             - zookeeper
     zookeeper:
