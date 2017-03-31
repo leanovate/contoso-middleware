@@ -9,15 +9,13 @@ services:
             file: services/mariadb.yml
             service: mariadb
     kafka:
-        extends:
-            file: services/kafka.yml
-            service: kafka
-        depends_on:
-            - zookeeper
-    zookeeper:
-        extends:
-            file: services/kafka.yml
-            service: zookeeper
+        image: spotify/kafka
+        ports:
+            - 9092:9092
+            - 2181:2181
+        environment:
+            - ADVERTISED_HOST=localhost
+            - ADVERTISED_PORT=9092
     jhipster-registry:
         extends:
             file: services/jhipster-registry.yml
